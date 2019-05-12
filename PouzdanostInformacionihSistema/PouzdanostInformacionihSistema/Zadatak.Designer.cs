@@ -29,8 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBoxBrojOtkaza = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -40,6 +39,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -51,19 +51,13 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "U intervalima vremena po ";
             // 
-            // textBox1
+            // textBoxBrojOtkaza
             // 
-            this.textBox1.Location = new System.Drawing.Point(170, 64);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(41, 20);
-            this.textBox1.TabIndex = 1;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(407, 64);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(38, 20);
-            this.textBox2.TabIndex = 2;
+            this.textBoxBrojOtkaza.Enabled = false;
+            this.textBoxBrojOtkaza.Location = new System.Drawing.Point(407, 64);
+            this.textBoxBrojOtkaza.Name = "textBoxBrojOtkaza";
+            this.textBoxBrojOtkaza.Size = new System.Drawing.Size(38, 20);
+            this.textBoxBrojOtkaza.TabIndex = 2;
             // 
             // label2
             // 
@@ -112,7 +106,7 @@
             "10000",
             "100000",
             "1000000"});
-            this.comboBoxVremeRada.Location = new System.Drawing.Point(702, 64);
+            this.comboBoxVremeRada.Location = new System.Drawing.Point(163, 64);
             this.comboBoxVremeRada.Name = "comboBoxVremeRada";
             this.comboBoxVremeRada.Size = new System.Drawing.Size(63, 21);
             this.comboBoxVremeRada.TabIndex = 7;
@@ -171,11 +165,22 @@
             this.label6.TabIndex = 11;
             this.label6.Text = "b) Pouzdanost u trenutku t";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(516, 351);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Izračunaj";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Zadatak
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1024, 490);
+            this.ClientSize = new System.Drawing.Size(857, 490);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -185,8 +190,7 @@
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxBrojOtkaza);
             this.Controls.Add(this.label1);
             this.Name = "Zadatak";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -199,8 +203,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBoxBrojOtkaza;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox3;
@@ -210,6 +213,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -37,6 +37,7 @@ namespace PouzdanostInformacionihSistema
                 x += 50;
             }
         }
+
         private void removeTable(string tableName)
         {
             for (int i = 0; i < 15; i++)
@@ -81,7 +82,40 @@ namespace PouzdanostInformacionihSistema
             drawTable(40,0, "prva");
             comboBoxVremeRada.Enabled = true;
         }
+        private int brojOtkaza()
+        {
+            int suma = 0;
+            for (int i = 0; i < Convert.ToInt32(comboBoxBrojIntervala.SelectedItem); i++)
+            {
+                suma += Convert.ToInt32(((TextBox)this.Controls["txtBoxprva" + i + "1"]).Text);
+            }
+            return suma;
+        }
 
-    
+        private void button1_Click(object sender, EventArgs e)
+        {
+            textBoxBrojOtkaza.Text = brojOtkaza().ToString();
+            nepouzdanost();
+            pouzdanost();
+        }
+
+        private void nepouzdanost()
+        {
+            decimal sumaOtkaza = 0;
+            for (int i = 0; i < Convert.ToInt32(comboBoxBrojIntervala.SelectedItem); i++)
+            {
+                sumaOtkaza += Convert.ToInt32(((TextBox)this.Controls["txtBoxprva" + i + "1"]).Text);
+                ((TextBox)this.Controls["txtBoxdruga" + i + "1"]).Text =Math.Round((sumaOtkaza / Convert.ToDecimal(textBoxBrojOtkaza.Text)), 4).ToString();
+            }
+
+        }
+        private void pouzdanost()
+        {
+            for (int i = 0; i < Convert.ToInt32(comboBoxBrojIntervala.SelectedItem); i++)
+            {
+                decimal pouzdanost = Convert.ToDecimal (((TextBox)this.Controls["txtBoxdruga" + i + "1"]).Text);
+                ((TextBox)this.Controls["txtBoxtreca" + i + "1"]).Text = Math.Round(1 - pouzdanost, 4).ToString();
+            }
+        }
     }
 }
