@@ -37,6 +37,9 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.comboBoxVremeRada = new System.Windows.Forms.ComboBox();
             this.comboBoxBrojIntervala = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -141,11 +144,41 @@
             this.comboBoxBrojIntervala.TabIndex = 8;
             this.comboBoxBrojIntervala.SelectedIndexChanged += new System.EventHandler(this.comboBoxBrojIntervala_SelectedIndexChanged);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 169);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(101, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Potrebno je odrediti:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 202);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(189, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "a) Nepouzdanost u trenutku vremena t";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 273);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(132, 13);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "b) Pouzdanost u trenutku t";
+            // 
             // Zadatak
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 490);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.comboBoxBrojIntervala);
             this.Controls.Add(this.comboBoxVremeRada);
             this.Controls.Add(this.textBox4);
@@ -174,6 +207,9 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.ComboBox comboBoxVremeRada;
         private System.Windows.Forms.ComboBox comboBoxBrojIntervala;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }
 
