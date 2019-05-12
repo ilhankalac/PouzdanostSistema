@@ -62,6 +62,18 @@ namespace PouzdanostInformacionihSistema
             removeTable("treca");
             drawTable(-7, 200, "treca");
             intervali("treca");
+
+            puniComboIntervala();
+            
+        }
+        private void puniComboIntervala()
+        {
+            comboBoxPrviInterval.Items.Clear();
+            for (int i = 1; i <= Convert.ToInt32(comboBoxBrojIntervala.SelectedItem); i++)
+            {
+                comboBoxPrviInterval.Items.Add(Convert.ToInt32(comboBoxVremeRada.SelectedItem)*i);
+                comboBoxPrviIntervalOtkaza.Items.Add(Convert.ToInt32(comboBoxVremeRada.SelectedItem) * i);
+            }
         }
         private void intervali(string tableName)
         {
@@ -97,10 +109,39 @@ namespace PouzdanostInformacionihSistema
             textBoxBrojOtkaza.Text = brojOtkaza().ToString();
             nepouzdanost();
             pouzdanost();
+
+            int velicinaIntervala = Convert.ToInt32(comboBoxVremeRada.SelectedItem);
+            int drugaPozicijaRada = (Convert.ToInt32(comboBoxDrugiInterval.SelectedItem) / velicinaIntervala) - 1;
+            int prvaPozicijaRada = (Convert.ToInt32(comboBoxPrviInterval.SelectedItem) / velicinaIntervala) - 1;
+            labelVerovatnocaIspravnogRada.Text = Math.Round(verovatnocaIspravnogRada(prvaPozicijaRada, drugaPozicijaRada),4).ToString();
+
+           
+            int drugaPozicijaOtkaza = (Convert.ToInt32(comboBoxDrugiInterval.SelectedItem) / velicinaIntervala) - 1;
+            int prvaPozicijaOtkaza = (Convert.ToInt32(comboBoxPrviInterval.SelectedItem) / velicinaIntervala) - 1;
+            labelVerovatnocaOtkaza.Text = Math.Round(verovatnocaOtkaza(prvaPozicijaOtkaza, drugaPozicijaOtkaza), 4).ToString();
+        }
+        private decimal verovatnocaIspravnogRada(int prvaPozicija, int drugaPozicija)
+        {
+
+            decimal drugiElement = Convert.ToDecimal(((TextBox)this.Controls["txtBoxdruga" + drugaPozicija + "1"]).Text);
+            decimal prviElement = Convert.ToDecimal(((TextBox)this.Controls["txtBoxdruga" + prvaPozicija + "1"]).Text);
+
+            return prviElement / drugiElement;
+
         }
 
+        private decimal verovatnocaOtkaza(int prvaPozicija, int drugaPozicija)
+        {
+
+            decimal drugiElement = Convert.ToDecimal(((TextBox)this.Controls["txtBoxdruga" + drugaPozicija + "1"]).Text);
+            decimal prviElement = Convert.ToDecimal(((TextBox)this.Controls["txtBoxdruga" + prvaPozicija + "1"]).Text);
+
+            return 1  - (prviElement / drugiElement);
+
+        }
         private void nepouzdanost()
         {
+
             decimal sumaOtkaza = 0;
             for (int i = 0; i < Convert.ToInt32(comboBoxBrojIntervala.SelectedItem); i++)
             {
@@ -115,6 +156,36 @@ namespace PouzdanostInformacionihSistema
             {
                 decimal pouzdanost = Convert.ToDecimal (((TextBox)this.Controls["txtBoxdruga" + i + "1"]).Text);
                 ((TextBox)this.Controls["txtBoxtreca" + i + "1"]).Text = Math.Round(1 - pouzdanost, 4).ToString();
+            }
+        }
+
+        private void comboBoxPrviInterval_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBoxDrugiInterval.Enabled = true;
+            comboBoxDrugiInterval.Items.Clear();
+
+            int velicinaIntervala = Convert.ToInt32(comboBoxVremeRada.SelectedItem);
+            int selektovaniInterval = comboBoxPrviInterval.SelectedIndex + 2;
+
+            for (int i = comboBoxPrviInterval.SelectedIndex; i < Convert.ToInt32(comboBoxBrojIntervala.SelectedItem)-1; i++)
+            {
+                comboBoxDrugiInterval.Items.Add(velicinaIntervala * selektovaniInterval);
+                selektovaniInterval++;
+            }
+        }
+
+        private void comboBoxPrviIntervalOtkaza_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBoxDrugiIntervalOtkaza.Enabled = true;
+            comboBoxDrugiIntervalOtkaza.Items.Clear();
+
+            int velicinaIntervala = Convert.ToInt32(comboBoxVremeRada.SelectedItem);
+            int selektovaniInterval = comboBoxPrviIntervalOtkaza.SelectedIndex + 2;
+
+            for (int i = comboBoxPrviIntervalOtkaza.SelectedIndex; i < Convert.ToInt32(comboBoxBrojIntervala.SelectedItem) - 1; i++)
+            {
+                comboBoxDrugiIntervalOtkaza.Items.Add(velicinaIntervala * selektovaniInterval);
+                selektovaniInterval++;
             }
         }
     }

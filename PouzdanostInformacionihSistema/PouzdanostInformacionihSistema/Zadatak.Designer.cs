@@ -40,6 +40,18 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.comboBoxPrviInterval = new System.Windows.Forms.ComboBox();
+            this.comboBoxDrugiInterval = new System.Windows.Forms.ComboBox();
+            this.labelVerovatnocaIspravnogRada = new System.Windows.Forms.Label();
+            this.labelVerovatnocaOtkaza = new System.Windows.Forms.Label();
+            this.comboBoxDrugiIntervalOtkaza = new System.Windows.Forms.ComboBox();
+            this.comboBoxPrviIntervalOtkaza = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.labelSrednjeVremeDoOtkaza = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -167,19 +179,148 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(516, 351);
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(572, 422);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(122, 56);
             this.button1.TabIndex = 12;
             this.button1.Text = "Izračunaj";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 356);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(205, 13);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "v) Verovatnoću ispravnog rada u intervalu";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(365, 356);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(78, 13);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "časova rada = ";
+            // 
+            // comboBoxPrviInterval
+            // 
+            this.comboBoxPrviInterval.FormattingEnabled = true;
+            this.comboBoxPrviInterval.Location = new System.Drawing.Point(223, 353);
+            this.comboBoxPrviInterval.Name = "comboBoxPrviInterval";
+            this.comboBoxPrviInterval.Size = new System.Drawing.Size(63, 21);
+            this.comboBoxPrviInterval.TabIndex = 15;
+            this.comboBoxPrviInterval.SelectedIndexChanged += new System.EventHandler(this.comboBoxPrviInterval_SelectedIndexChanged);
+            // 
+            // comboBoxDrugiInterval
+            // 
+            this.comboBoxDrugiInterval.Cursor = System.Windows.Forms.Cursors.SizeNWSE;
+            this.comboBoxDrugiInterval.Enabled = false;
+            this.comboBoxDrugiInterval.FormattingEnabled = true;
+            this.comboBoxDrugiInterval.Location = new System.Drawing.Point(301, 353);
+            this.comboBoxDrugiInterval.Name = "comboBoxDrugiInterval";
+            this.comboBoxDrugiInterval.Size = new System.Drawing.Size(58, 21);
+            this.comboBoxDrugiInterval.TabIndex = 16;
+            // 
+            // labelVerovatnocaIspravnogRada
+            // 
+            this.labelVerovatnocaIspravnogRada.AutoSize = true;
+            this.labelVerovatnocaIspravnogRada.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelVerovatnocaIspravnogRada.Location = new System.Drawing.Point(439, 349);
+            this.labelVerovatnocaIspravnogRada.Name = "labelVerovatnocaIspravnogRada";
+            this.labelVerovatnocaIspravnogRada.Size = new System.Drawing.Size(25, 25);
+            this.labelVerovatnocaIspravnogRada.TabIndex = 17;
+            this.labelVerovatnocaIspravnogRada.Text = "0";
+            // 
+            // labelVerovatnocaOtkaza
+            // 
+            this.labelVerovatnocaOtkaza.AutoSize = true;
+            this.labelVerovatnocaOtkaza.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelVerovatnocaOtkaza.Location = new System.Drawing.Point(439, 392);
+            this.labelVerovatnocaOtkaza.Name = "labelVerovatnocaOtkaza";
+            this.labelVerovatnocaOtkaza.Size = new System.Drawing.Size(25, 25);
+            this.labelVerovatnocaOtkaza.TabIndex = 22;
+            this.labelVerovatnocaOtkaza.Text = "0";
+            // 
+            // comboBoxDrugiIntervalOtkaza
+            // 
+            this.comboBoxDrugiIntervalOtkaza.Cursor = System.Windows.Forms.Cursors.SizeNWSE;
+            this.comboBoxDrugiIntervalOtkaza.Enabled = false;
+            this.comboBoxDrugiIntervalOtkaza.FormattingEnabled = true;
+            this.comboBoxDrugiIntervalOtkaza.Location = new System.Drawing.Point(301, 396);
+            this.comboBoxDrugiIntervalOtkaza.Name = "comboBoxDrugiIntervalOtkaza";
+            this.comboBoxDrugiIntervalOtkaza.Size = new System.Drawing.Size(58, 21);
+            this.comboBoxDrugiIntervalOtkaza.TabIndex = 21;
+            // 
+            // comboBoxPrviIntervalOtkaza
+            // 
+            this.comboBoxPrviIntervalOtkaza.FormattingEnabled = true;
+            this.comboBoxPrviIntervalOtkaza.Location = new System.Drawing.Point(223, 396);
+            this.comboBoxPrviIntervalOtkaza.Name = "comboBoxPrviIntervalOtkaza";
+            this.comboBoxPrviIntervalOtkaza.Size = new System.Drawing.Size(63, 21);
+            this.comboBoxPrviIntervalOtkaza.TabIndex = 20;
+            this.comboBoxPrviIntervalOtkaza.SelectedIndexChanged += new System.EventHandler(this.comboBoxPrviIntervalOtkaza_SelectedIndexChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(365, 399);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(78, 13);
+            this.label10.TabIndex = 19;
+            this.label10.Text = "časova rada = ";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(12, 399);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(167, 13);
+            this.label11.TabIndex = 18;
+            this.label11.Text = "g) Verovatnoću otkaza u intervalu";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(12, 445);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(176, 13);
+            this.label9.TabIndex = 23;
+            this.label9.Text = "d) Srednje vreme rada do otkaza =  ";
+            // 
+            // labelSrednjeVremeDoOtkaza
+            // 
+            this.labelSrednjeVremeDoOtkaza.AutoSize = true;
+            this.labelSrednjeVremeDoOtkaza.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSrednjeVremeDoOtkaza.Location = new System.Drawing.Point(177, 441);
+            this.labelSrednjeVremeDoOtkaza.Name = "labelSrednjeVremeDoOtkaza";
+            this.labelSrednjeVremeDoOtkaza.Size = new System.Drawing.Size(25, 25);
+            this.labelSrednjeVremeDoOtkaza.TabIndex = 24;
+            this.labelSrednjeVremeDoOtkaza.Text = "0";
             // 
             // Zadatak
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(857, 490);
+            this.Controls.Add(this.labelSrednjeVremeDoOtkaza);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.labelVerovatnocaOtkaza);
+            this.Controls.Add(this.comboBoxDrugiIntervalOtkaza);
+            this.Controls.Add(this.comboBoxPrviIntervalOtkaza);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.labelVerovatnocaIspravnogRada);
+            this.Controls.Add(this.comboBoxDrugiInterval);
+            this.Controls.Add(this.comboBoxPrviInterval);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -214,6 +355,18 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox comboBoxPrviInterval;
+        private System.Windows.Forms.ComboBox comboBoxDrugiInterval;
+        private System.Windows.Forms.Label labelVerovatnocaIspravnogRada;
+        private System.Windows.Forms.Label labelVerovatnocaOtkaza;
+        private System.Windows.Forms.ComboBox comboBoxDrugiIntervalOtkaza;
+        private System.Windows.Forms.ComboBox comboBoxPrviIntervalOtkaza;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label labelSrednjeVremeDoOtkaza;
     }
 }
 
