@@ -104,39 +104,24 @@ namespace PouzdanostInformacionihSistema
             return suma;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            textBoxBrojOtkaza.Text = brojOtkaza().ToString();
-            nepouzdanost();
-            pouzdanost();
 
-            int velicinaIntervala = Convert.ToInt32(comboBoxVremeRada.SelectedItem);
-            int drugaPozicijaRada = (Convert.ToInt32(comboBoxDrugiInterval.SelectedItem) / velicinaIntervala) - 1;
-            int prvaPozicijaRada = (Convert.ToInt32(comboBoxPrviInterval.SelectedItem) / velicinaIntervala) - 1;
-            labelVerovatnocaIspravnogRada.Text = Math.Round(verovatnocaIspravnogRada(prvaPozicijaRada, drugaPozicijaRada),4).ToString();
-
-           
-            int drugaPozicijaOtkaza = (Convert.ToInt32(comboBoxDrugiInterval.SelectedItem) / velicinaIntervala) - 1;
-            int prvaPozicijaOtkaza = (Convert.ToInt32(comboBoxPrviInterval.SelectedItem) / velicinaIntervala) - 1;
-            labelVerovatnocaOtkaza.Text = Math.Round(verovatnocaOtkaza(prvaPozicijaOtkaza, drugaPozicijaOtkaza), 4).ToString();
-        }
         private decimal verovatnocaIspravnogRada(int prvaPozicija, int drugaPozicija)
         {
 
-            decimal drugiElement = Convert.ToDecimal(((TextBox)this.Controls["txtBoxdruga" + drugaPozicija + "1"]).Text);
-            decimal prviElement = Convert.ToDecimal(((TextBox)this.Controls["txtBoxdruga" + prvaPozicija + "1"]).Text);
+            decimal drugiElement = Convert.ToDecimal(((TextBox)this.Controls["txtBoxtreca" + drugaPozicija + "1"]).Text);
+            decimal prviElement = Convert.ToDecimal(((TextBox)this.Controls["txtBoxtreca" + prvaPozicija + "1"]).Text);
 
-            return prviElement / drugiElement;
+            return drugiElement / prviElement;
 
         }
 
         private decimal verovatnocaOtkaza(int prvaPozicija, int drugaPozicija)
         {
 
-            decimal drugiElement = Convert.ToDecimal(((TextBox)this.Controls["txtBoxdruga" + drugaPozicija + "1"]).Text);
-            decimal prviElement = Convert.ToDecimal(((TextBox)this.Controls["txtBoxdruga" + prvaPozicija + "1"]).Text);
+            decimal drugiElement = Convert.ToDecimal(((TextBox)this.Controls["txtBoxtreca" + drugaPozicija + "1"]).Text);
+            decimal prviElement = Convert.ToDecimal(((TextBox)this.Controls["txtBoxtreca" + prvaPozicija + "1"]).Text);
 
-            return 1  - (prviElement / drugiElement);
+            return 1  - (drugiElement / prviElement);
 
         }
         private void nepouzdanost()
@@ -187,6 +172,50 @@ namespace PouzdanostInformacionihSistema
                 comboBoxDrugiIntervalOtkaza.Items.Add(velicinaIntervala * selektovaniInterval);
                 selektovaniInterval++;
             }
+        }
+
+        private void buttonIzracunaj_Click(object sender, EventArgs e)
+        {
+            textBoxBrojOtkaza.Text = brojOtkaza().ToString();
+            nepouzdanost();
+            pouzdanost();
+
+            int velicinaIntervala = Convert.ToInt32(comboBoxVremeRada.SelectedItem);
+            int drugaPozicijaRada = (Convert.ToInt32(comboBoxDrugiInterval.SelectedItem) / velicinaIntervala) - 1;
+            int prvaPozicijaRada = (Convert.ToInt32(comboBoxPrviInterval.SelectedItem) / velicinaIntervala) - 1;
+            labelVerovatnocaIspravnogRada.Text = Math.Round(verovatnocaIspravnogRada(prvaPozicijaRada, drugaPozicijaRada), 4).ToString();
+
+
+            int drugaPozicijaOtkaza = (Convert.ToInt32(comboBoxDrugiIntervalOtkaza.SelectedItem) / velicinaIntervala) - 1;
+            int prvaPozicijaOtkaza = (Convert.ToInt32(comboBoxPrviIntervalOtkaza.SelectedItem) / velicinaIntervala) - 1;
+            labelVerovatnocaOtkaza.Text = Math.Round(verovatnocaOtkaza(prvaPozicijaOtkaza, drugaPozicijaOtkaza), 4).ToString();
+
+            labelSrednjeVremeDoOtkaza.Text =  srednjeVremeDoOtkaza().ToString();
+        }
+
+        private decimal srednjeVremeDoOtkaza()
+        {
+            int sumaIntervala = 0;
+            int brojIntervala = Convert.ToInt32(comboBoxBrojIntervala.SelectedItem) - 1;
+
+            int[] nizIntervala = new int[brojIntervala];
+            for (int i = 0; i < brojIntervala; i++)
+            {
+                nizIntervala[i] = Convert.ToInt32(((TextBox)this.Controls["txtBoxprva" + i + "1"]).Text);
+            }
+
+
+            int prviUmanjilac = Convert.ToInt32(textBoxBrojOtkaza.Text) - nizIntervala[0];
+            int pom = 0;
+            for (int i = 1; i < brojIntervala; i++)
+            {
+                pom = prviUmanjilac - nizIntervala[i];
+                sumaIntervala += pom;
+            }
+
+            sumaIntervala += prviUmanjilac;
+
+            return sumaIntervala;
         }
     }
 }

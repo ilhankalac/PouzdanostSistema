@@ -39,7 +39,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonIzracunaj = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.comboBoxPrviInterval = new System.Windows.Forms.ComboBox();
@@ -112,12 +112,12 @@
             this.comboBoxVremeRada.Enabled = false;
             this.comboBoxVremeRada.FormattingEnabled = true;
             this.comboBoxVremeRada.Items.AddRange(new object[] {
+            "1",
             "10",
             "100",
             "1000",
             "10000",
-            "100000",
-            "1000000"});
+            "100000"});
             this.comboBoxVremeRada.Location = new System.Drawing.Point(163, 64);
             this.comboBoxVremeRada.Name = "comboBoxVremeRada";
             this.comboBoxVremeRada.Size = new System.Drawing.Size(63, 21);
@@ -177,19 +177,19 @@
             this.label6.TabIndex = 11;
             this.label6.Text = "b) Pouzdanost u trenutku t";
             // 
-            // button1
+            // buttonIzracunaj
             // 
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(572, 422);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(122, 56);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Izračunaj";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonIzracunaj.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.buttonIzracunaj.FlatAppearance.BorderSize = 0;
+            this.buttonIzracunaj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonIzracunaj.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonIzracunaj.Location = new System.Drawing.Point(572, 422);
+            this.buttonIzracunaj.Name = "buttonIzracunaj";
+            this.buttonIzracunaj.Size = new System.Drawing.Size(122, 56);
+            this.buttonIzracunaj.TabIndex = 12;
+            this.buttonIzracunaj.Text = "Izračunaj";
+            this.buttonIzracunaj.UseVisualStyleBackColor = true;
+            this.buttonIzracunaj.Click += new System.EventHandler(this.buttonIzracunaj_Click);
             // 
             // label7
             // 
@@ -321,7 +321,7 @@
             this.Controls.Add(this.comboBoxPrviInterval);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonIzracunaj);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -354,7 +354,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonIzracunaj;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox comboBoxPrviInterval;
