@@ -204,18 +204,19 @@ namespace PouzdanostInformacionihSistema
                 nizIntervala[i] = Convert.ToInt32(((TextBox)this.Controls["txtBoxprva" + i + "1"]).Text);
             }
 
+            int[] nizZbiraIntervala = new int[brojIntervala];
+            nizZbiraIntervala[0] = Convert.ToInt32(textBoxBrojOtkaza.Text) - nizIntervala[0];
 
-            int prviUmanjilac = Convert.ToInt32(textBoxBrojOtkaza.Text) - nizIntervala[0];
-            int pom = 0;
+            sumaIntervala += nizZbiraIntervala[0];
             for (int i = 1; i < brojIntervala; i++)
             {
-                pom = prviUmanjilac - nizIntervala[i];
-                sumaIntervala += pom;
+                nizZbiraIntervala[i] = nizZbiraIntervala[i - 1] - nizIntervala[i];
+                sumaIntervala += nizZbiraIntervala[i];
             }
 
-            sumaIntervala += prviUmanjilac;
+            
 
-            return sumaIntervala;
+            return sumaIntervala / Convert.ToDecimal(textBoxBrojOtkaza.Text) * Convert.ToDecimal(comboBoxVremeRada.SelectedItem);
         }
     }
 }
