@@ -27,6 +27,8 @@ namespace PouzdanostInformacionihSistema
                 {
                     TextBox txtBox = new TextBox();
                     Point p = new Point(xStart + x, yStart + y);
+                    if (j % 2 == 0)
+                        txtBox.Enabled = false;
                     txtBox.Location = p;
                     txtBox.Width = 50;
                     txtBox.Name = "txtBox" + tableName + i + j;
@@ -69,6 +71,8 @@ namespace PouzdanostInformacionihSistema
         private void puniComboIntervala()
         {
             comboBoxPrviInterval.Items.Clear();
+            comboBoxPrviInterval.Items.Clear();
+
             for (int i = 1; i <= Convert.ToInt32(comboBoxBrojIntervala.SelectedItem); i++)
             {
                 comboBoxPrviInterval.Items.Add(Convert.ToInt32(comboBoxVremeRada.SelectedItem)*i);
@@ -93,6 +97,16 @@ namespace PouzdanostInformacionihSistema
             removeTable("treca");
             drawTable(40,0, "prva");
             comboBoxVremeRada.Enabled = true;
+            resetujKontrole();
+        }
+        private void resetujKontrole()
+        {
+            comboBoxPrviIntervalOtkaza.Text = "";
+            comboBoxPrviInterval.Text = "";
+            comboBoxVremeRada.Text = "";
+
+            comboBoxPrviIntervalOtkaza.Items.Clear();
+            comboBoxPrviInterval.Items.Clear();
         }
         private int brojOtkaza()
         {
@@ -115,15 +129,7 @@ namespace PouzdanostInformacionihSistema
 
         }
 
-        private decimal verovatnocaOtkaza(int prvaPozicija, int drugaPozicija)
-        {
-
-            decimal drugiElement = Convert.ToDecimal(((TextBox)this.Controls["txtBoxtreca" + drugaPozicija + "1"]).Text);
-            decimal prviElement = Convert.ToDecimal(((TextBox)this.Controls["txtBoxtreca" + prvaPozicija + "1"]).Text);
-
-            return 1  - (drugiElement / prviElement);
-
-        }
+     
         private void nepouzdanost()
         {
 
@@ -188,9 +194,9 @@ namespace PouzdanostInformacionihSistema
 
             int drugaPozicijaOtkaza = (Convert.ToInt32(comboBoxDrugiIntervalOtkaza.SelectedItem) / velicinaIntervala) - 1;
             int prvaPozicijaOtkaza = (Convert.ToInt32(comboBoxPrviIntervalOtkaza.SelectedItem) / velicinaIntervala) - 1;
-            labelVerovatnocaOtkaza.Text = Math.Round(verovatnocaOtkaza(prvaPozicijaOtkaza, drugaPozicijaOtkaza), 4).ToString();
+            labelVerovatnocaOtkaza.Text = Math.Round(1-(verovatnocaIspravnogRada(prvaPozicijaOtkaza, drugaPozicijaOtkaza)), 4).ToString();
 
-            labelSrednjeVremeDoOtkaza.Text =  srednjeVremeDoOtkaza().ToString();
+            labelSrednjeVremeDoOtkaza.Text =  Math.Round(srednjeVremeDoOtkaza(),4)+" sati".ToString();
         }
 
         private decimal srednjeVremeDoOtkaza()
