@@ -27,13 +27,21 @@ namespace PouzdanostInformacionihSistema
                 {
                     TextBox txtBox = new TextBox();
                     Point p = new Point(xStart + x, yStart + y);
-                    if (j % 2 == 0)
-                        txtBox.Enabled = false;
                     txtBox.Location = p;
                     txtBox.Width = 50;
+                    
+                    //ogranicavanje da mogu samo brojevi da se unose u textBox-u 
+                    txtBox.KeyPress += (sender, e) => {
+                        const char Delete = (char)8;
+                        e.Handled = !Char.IsDigit(e.KeyChar) && e.KeyChar != Delete;
+                    };
                     txtBox.BorderStyle = BorderStyle.FixedSingle;
                     txtBox.Name = "txtBox" + tableName + i + j;
                     y += 20;
+                
+                    if (j % 2 == 0)
+                        txtBox.Enabled = false;
+
                     this.Controls.Add(txtBox);
                 }
             
@@ -185,7 +193,7 @@ namespace PouzdanostInformacionihSistema
         {
             try
             {
-                SaveScreenshot(this);
+               
                 textBoxBrojOtkaza.Text = brojOtkaza().ToString();
                 nepouzdanost();
                 pouzdanost();
@@ -203,22 +211,14 @@ namespace PouzdanostInformacionihSistema
 
                 labelSrednjeVremeDoOtkaza.Text = Math.Round(srednjeVremeDoOtkaza(), 4) + " sati".ToString();
 
-
-               
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Morate uneti sve informacije i odabrati oba intervala za racun pod v i g!");
+                MessageBox.Show("Morate uneti sve informacije i odabrati oba intervala za račun pod v i g.", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
         }
-        private static void SaveScreenshot(Form frm)
-        {
-            string ImagePath = string.Format(@"C:\Users\Ilhan Kalac\Desktop", DateTime.Now.Ticks);
-            Bitmap Image = new Bitmap(frm.Width, frm.Height);
-            frm.DrawToBitmap(Image, new Rectangle(0, 0, frm.Width, frm.Height));
-            Image.Save(ImagePath, System.Drawing.Imaging.ImageFormat.Png);
-        }
+
         private decimal srednjeVremeDoOtkaza()
         {
             int sumaIntervala = 0;
@@ -241,6 +241,34 @@ namespace PouzdanostInformacionihSistema
             }
 
             return sumaIntervala / Convert.ToDecimal(textBoxBrojOtkaza.Text) * Convert.ToDecimal(comboBoxVremeRada.SelectedItem);
+        }
+
+        private void btnScreenShot_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(labelSrednjeVremeDoOtkaza.Text != "0")
+                {
+                    SaveScreenshot(this);
+                    MessageBox.Show("Uspešno sačuvan screenshot rezultata.", "Poruka", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Pre čuvanja rezultata morate imati neki račun.", "Poruka", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Došlo je do greške: " + ex.Message);
+            }
+        }
+        private static void SaveScreenshot(Form frm)
+        {
+            string ImagePath = string.Format(System.AppDomain.CurrentDomain.BaseDirectory + @"\Rezultati_Screenshots\Screen_{0}.png", DateTime.Now.Ticks);
+            Bitmap Image = new Bitmap(frm.Width, frm.Height);
+            frm.DrawToBitmap(Image, new Rectangle(0, 0, frm.Width, frm.Height));
+            Image.Save(ImagePath, System.Drawing.Imaging.ImageFormat.Png);
         }
     }
 }

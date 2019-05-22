@@ -53,6 +53,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.labelSrednjeVremeDoOtkaza = new System.Windows.Forms.Label();
+            this.btnScreenShot = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -70,7 +71,7 @@
             this.textBoxBrojOtkaza.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxBrojOtkaza.Enabled = false;
             this.textBoxBrojOtkaza.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxBrojOtkaza.Location = new System.Drawing.Point(436, 67);
+            this.textBoxBrojOtkaza.Location = new System.Drawing.Point(462, 67);
             this.textBoxBrojOtkaza.Name = "textBoxBrojOtkaza";
             this.textBoxBrojOtkaza.Size = new System.Drawing.Size(58, 14);
             this.textBoxBrojOtkaza.TabIndex = 2;
@@ -79,7 +80,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(232, 67);
+            this.label2.Location = new System.Drawing.Point(258, 67);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(198, 16);
             this.label2.TabIndex = 3;
@@ -89,7 +90,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(500, 67);
+            this.label3.Location = new System.Drawing.Point(526, 67);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(221, 16);
             this.label3.TabIndex = 4;
@@ -128,7 +129,7 @@
             "1000",
             "10000",
             "100000"});
-            this.comboBoxVremeRada.Location = new System.Drawing.Point(163, 64);
+            this.comboBoxVremeRada.Location = new System.Drawing.Point(189, 64);
             this.comboBoxVremeRada.Name = "comboBoxVremeRada";
             this.comboBoxVremeRada.Size = new System.Drawing.Size(63, 24);
             this.comboBoxVremeRada.TabIndex = 7;
@@ -194,16 +195,19 @@
             // 
             // buttonIzracunaj
             // 
+            this.buttonIzracunaj.BackColor = System.Drawing.Color.Transparent;
             this.buttonIzracunaj.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonIzracunaj.FlatAppearance.BorderSize = 0;
             this.buttonIzracunaj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonIzracunaj.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonIzracunaj.Location = new System.Drawing.Point(163, 27);
+            this.buttonIzracunaj.Image = ((System.Drawing.Image)(resources.GetObject("buttonIzracunaj.Image")));
+            this.buttonIzracunaj.Location = new System.Drawing.Point(790, 351);
             this.buttonIzracunaj.Name = "buttonIzracunaj";
-            this.buttonIzracunaj.Size = new System.Drawing.Size(122, 56);
+            this.buttonIzracunaj.Size = new System.Drawing.Size(113, 115);
             this.buttonIzracunaj.TabIndex = 12;
             this.buttonIzracunaj.Text = "Izračunaj";
-            this.buttonIzracunaj.UseVisualStyleBackColor = true;
+            this.buttonIzracunaj.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.buttonIzracunaj.UseVisualStyleBackColor = false;
             this.buttonIzracunaj.Click += new System.EventHandler(this.buttonIzracunaj_Click);
             // 
             // label7
@@ -253,7 +257,7 @@
             // 
             this.labelVerovatnocaIspravnogRada.AutoSize = true;
             this.labelVerovatnocaIspravnogRada.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelVerovatnocaIspravnogRada.Location = new System.Drawing.Point(476, 357);
+            this.labelVerovatnocaIspravnogRada.Location = new System.Drawing.Point(483, 357);
             this.labelVerovatnocaIspravnogRada.Name = "labelVerovatnocaIspravnogRada";
             this.labelVerovatnocaIspravnogRada.Size = new System.Drawing.Size(18, 19);
             this.labelVerovatnocaIspravnogRada.TabIndex = 17;
@@ -263,7 +267,7 @@
             // 
             this.labelVerovatnocaOtkaza.AutoSize = true;
             this.labelVerovatnocaOtkaza.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelVerovatnocaOtkaza.Location = new System.Drawing.Point(476, 400);
+            this.labelVerovatnocaOtkaza.Location = new System.Drawing.Point(483, 400);
             this.labelVerovatnocaOtkaza.Name = "labelVerovatnocaOtkaza";
             this.labelVerovatnocaOtkaza.Size = new System.Drawing.Size(18, 19);
             this.labelVerovatnocaOtkaza.TabIndex = 22;
@@ -326,18 +330,36 @@
             // 
             this.labelSrednjeVremeDoOtkaza.AutoSize = true;
             this.labelSrednjeVremeDoOtkaza.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSrednjeVremeDoOtkaza.Location = new System.Drawing.Point(209, 443);
+            this.labelSrednjeVremeDoOtkaza.Location = new System.Drawing.Point(216, 443);
             this.labelSrednjeVremeDoOtkaza.Name = "labelSrednjeVremeDoOtkaza";
             this.labelSrednjeVremeDoOtkaza.Size = new System.Drawing.Size(18, 19);
             this.labelSrednjeVremeDoOtkaza.TabIndex = 24;
             this.labelSrednjeVremeDoOtkaza.Text = "0";
+            // 
+            // btnScreenShot
+            // 
+            this.btnScreenShot.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnScreenShot.FlatAppearance.BorderSize = 0;
+            this.btnScreenShot.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnScreenShot.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnScreenShot.ForeColor = System.Drawing.Color.Gray;
+            this.btnScreenShot.Image = ((System.Drawing.Image)(resources.GetObject("btnScreenShot.Image")));
+            this.btnScreenShot.Location = new System.Drawing.Point(765, 2);
+            this.btnScreenShot.Name = "btnScreenShot";
+            this.btnScreenShot.Size = new System.Drawing.Size(162, 81);
+            this.btnScreenShot.TabIndex = 25;
+            this.btnScreenShot.Text = "Snimi rezultat";
+            this.btnScreenShot.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnScreenShot.UseVisualStyleBackColor = true;
+            this.btnScreenShot.Click += new System.EventHandler(this.btnScreenShot_Click);
             // 
             // Zadatak
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(399, 148);
+            this.ClientSize = new System.Drawing.Size(936, 490);
+            this.Controls.Add(this.btnScreenShot);
             this.Controls.Add(this.labelSrednjeVremeDoOtkaza);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.labelVerovatnocaOtkaza);
@@ -400,6 +422,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label labelSrednjeVremeDoOtkaza;
+        private System.Windows.Forms.Button btnScreenShot;
     }
 }
 
