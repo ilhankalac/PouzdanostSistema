@@ -31,6 +31,7 @@ namespace PouzdanostInformacionihSistema
                         txtBox.Enabled = false;
                     txtBox.Location = p;
                     txtBox.Width = 50;
+                    txtBox.BorderStyle = BorderStyle.FixedSingle;
                     txtBox.Name = "txtBox" + tableName + i + j;
                     y += 20;
                     this.Controls.Add(txtBox);
@@ -182,23 +183,42 @@ namespace PouzdanostInformacionihSistema
 
         private void buttonIzracunaj_Click(object sender, EventArgs e)
         {
-            textBoxBrojOtkaza.Text = brojOtkaza().ToString();
-            nepouzdanost();
-            pouzdanost();
+            try
+            {
+                SaveScreenshot(this);
+                textBoxBrojOtkaza.Text = brojOtkaza().ToString();
+                nepouzdanost();
+                pouzdanost();
 
-            int velicinaIntervala = Convert.ToInt32(comboBoxVremeRada.SelectedItem);
-            int drugaPozicijaRada = (Convert.ToInt32(comboBoxDrugiInterval.SelectedItem) / velicinaIntervala) - 1;
-            int prvaPozicijaRada = (Convert.ToInt32(comboBoxPrviInterval.SelectedItem) / velicinaIntervala) - 1;
-            labelVerovatnocaIspravnogRada.Text = Math.Round(verovatnocaIspravnogRada(prvaPozicijaRada, drugaPozicijaRada), 4).ToString();
+                int velicinaIntervala = Convert.ToInt32(comboBoxVremeRada.SelectedItem);
+                int drugaPozicijaRada = (Convert.ToInt32(comboBoxDrugiInterval.SelectedItem) / velicinaIntervala) - 1;
+                int prvaPozicijaRada = (Convert.ToInt32(comboBoxPrviInterval.SelectedItem) / velicinaIntervala) - 1;
+                labelVerovatnocaIspravnogRada.Text = Math.Round(verovatnocaIspravnogRada(prvaPozicijaRada, drugaPozicijaRada), 4).ToString();
 
 
-            int drugaPozicijaOtkaza = (Convert.ToInt32(comboBoxDrugiIntervalOtkaza.SelectedItem) / velicinaIntervala) - 1;
-            int prvaPozicijaOtkaza = (Convert.ToInt32(comboBoxPrviIntervalOtkaza.SelectedItem) / velicinaIntervala) - 1;
-            labelVerovatnocaOtkaza.Text = Math.Round(1-(verovatnocaIspravnogRada(prvaPozicijaOtkaza, drugaPozicijaOtkaza)), 4).ToString();
+                int drugaPozicijaOtkaza = (Convert.ToInt32(comboBoxDrugiIntervalOtkaza.SelectedItem) / velicinaIntervala) - 1;
+                int prvaPozicijaOtkaza = (Convert.ToInt32(comboBoxPrviIntervalOtkaza.SelectedItem) / velicinaIntervala) - 1;
+                labelVerovatnocaOtkaza.Text = Math.Round(1 - (verovatnocaIspravnogRada(prvaPozicijaOtkaza, drugaPozicijaOtkaza)), 4).ToString();
 
-            labelSrednjeVremeDoOtkaza.Text =  Math.Round(srednjeVremeDoOtkaza(),4)+" sati".ToString();
+
+                labelSrednjeVremeDoOtkaza.Text = Math.Round(srednjeVremeDoOtkaza(), 4) + " sati".ToString();
+
+
+               
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Morate uneti sve informacije i odabrati oba intervala za racun pod v i g!");
+            }
+            
         }
-
+        private static void SaveScreenshot(Form frm)
+        {
+            string ImagePath = string.Format(@"C:\Users\Ilhan Kalac\Desktop", DateTime.Now.Ticks);
+            Bitmap Image = new Bitmap(frm.Width, frm.Height);
+            frm.DrawToBitmap(Image, new Rectangle(0, 0, frm.Width, frm.Height));
+            Image.Save(ImagePath, System.Drawing.Imaging.ImageFormat.Png);
+        }
         private decimal srednjeVremeDoOtkaza()
         {
             int sumaIntervala = 0;
@@ -219,8 +239,6 @@ namespace PouzdanostInformacionihSistema
                 nizZbiraIntervala[i] = nizZbiraIntervala[i - 1] - nizIntervala[i];
                 sumaIntervala += nizZbiraIntervala[i];
             }
-
-            
 
             return sumaIntervala / Convert.ToDecimal(textBoxBrojOtkaza.Text) * Convert.ToDecimal(comboBoxVremeRada.SelectedItem);
         }
