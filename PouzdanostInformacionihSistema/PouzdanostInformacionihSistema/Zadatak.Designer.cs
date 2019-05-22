@@ -390,7 +390,7 @@
             this.MinimizeBox = false;
             this.Name = "Zadatak";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Pouzdanost informacionih sistema";
+            this.Text = "Pouzdanost sistema";
             this.ResumeLayout(false);
             this.PerformLayout();
 

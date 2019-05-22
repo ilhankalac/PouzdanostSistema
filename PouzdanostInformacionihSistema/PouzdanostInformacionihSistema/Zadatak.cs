@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,11 +70,12 @@ namespace PouzdanostInformacionihSistema
 
             intervali("druga");
 
-
             removeTable("treca");
             drawTable(-7, 200, "treca");
+
             intervali("treca");
 
+            resetujKontrole();
             puniComboIntervala();
             
         }
@@ -97,7 +99,6 @@ namespace PouzdanostInformacionihSistema
                 ((TextBox)this.Controls["txtBox" + tableName + i + "0"]).Text = interval.ToString();
                 k++;
             }
-
         }
         private void comboBoxBrojIntervala_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -107,56 +108,6 @@ namespace PouzdanostInformacionihSistema
             drawTable(40,0, "prva");
             comboBoxVremeRada.Enabled = true;
             resetujKontrole();
-        }
-        private void resetujKontrole()
-        {
-            comboBoxPrviIntervalOtkaza.Text = "";
-            comboBoxPrviInterval.Text = "";
-            comboBoxVremeRada.Text = "";
-
-            comboBoxPrviIntervalOtkaza.Items.Clear();
-            comboBoxPrviInterval.Items.Clear();
-        }
-        private int brojOtkaza()
-        {
-            int suma = 0;
-            for (int i = 0; i < Convert.ToInt32(comboBoxBrojIntervala.SelectedItem); i++)
-            {
-                suma += Convert.ToInt32(((TextBox)this.Controls["txtBoxprva" + i + "1"]).Text);
-            }
-            return suma;
-        }
-
-
-        private decimal verovatnocaIspravnogRada(int prvaPozicija, int drugaPozicija)
-        {
-
-            decimal drugiElement = Convert.ToDecimal(((TextBox)this.Controls["txtBoxtreca" + drugaPozicija + "1"]).Text);
-            decimal prviElement = Convert.ToDecimal(((TextBox)this.Controls["txtBoxtreca" + prvaPozicija + "1"]).Text);
-
-            return drugiElement / prviElement;
-
-        }
-
-     
-        private void nepouzdanost()
-        {
-
-            decimal sumaOtkaza = 0;
-            for (int i = 0; i < Convert.ToInt32(comboBoxBrojIntervala.SelectedItem); i++)
-            {
-                sumaOtkaza += Convert.ToInt32(((TextBox)this.Controls["txtBoxprva" + i + "1"]).Text);
-                ((TextBox)this.Controls["txtBoxdruga" + i + "1"]).Text =Math.Round((sumaOtkaza / Convert.ToDecimal(textBoxBrojOtkaza.Text)), 4).ToString();
-            }
-
-        }
-        private void pouzdanost()
-        {
-            for (int i = 0; i < Convert.ToInt32(comboBoxBrojIntervala.SelectedItem); i++)
-            {
-                decimal pouzdanost = Convert.ToDecimal (((TextBox)this.Controls["txtBoxdruga" + i + "1"]).Text);
-                ((TextBox)this.Controls["txtBoxtreca" + i + "1"]).Text = Math.Round(1 - pouzdanost, 4).ToString();
-            }
         }
 
         private void comboBoxPrviInterval_SelectedIndexChanged(object sender, EventArgs e)
@@ -193,7 +144,6 @@ namespace PouzdanostInformacionihSistema
         {
             try
             {
-               
                 textBoxBrojOtkaza.Text = brojOtkaza().ToString();
                 nepouzdanost();
                 pouzdanost();
@@ -208,17 +158,73 @@ namespace PouzdanostInformacionihSistema
                 int prvaPozicijaOtkaza = (Convert.ToInt32(comboBoxPrviIntervalOtkaza.SelectedItem) / velicinaIntervala) - 1;
                 labelVerovatnocaOtkaza.Text = Math.Round(1 - (verovatnocaIspravnogRada(prvaPozicijaOtkaza, drugaPozicijaOtkaza)), 4).ToString();
 
-
                 labelSrednjeVremeDoOtkaza.Text = Math.Round(srednjeVremeDoOtkaza(), 4) + " sati".ToString();
-
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Morate uneti sve informacije i odabrati oba intervala za račun pod v i g.", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
         }
 
+       
+
+        private void btnScreenShot_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(labelSrednjeVremeDoOtkaza.Text != "0")
+                {
+                    SaveScreenshot(this);
+                    MessageBox.Show("Uspešno sačuvan screenshot rezultata.", "Poruka", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Pre čuvanja rezultata morate imati neki račun.", "Poruka", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Došlo je do greške: " + ex.Message);
+            }
+        }
+        private int brojOtkaza()
+        {
+            int suma = 0;
+            for (int i = 0; i < Convert.ToInt32(comboBoxBrojIntervala.SelectedItem); i++)
+            {
+                suma += Convert.ToInt32(((TextBox)this.Controls["txtBoxprva" + i + "1"]).Text);
+            }
+            return suma;
+        }
+
+
+        private decimal verovatnocaIspravnogRada(int prvaPozicija, int drugaPozicija)
+        {
+            decimal drugiElement = Convert.ToDecimal(((TextBox)this.Controls["txtBoxtreca" + drugaPozicija + "1"]).Text);
+            decimal prviElement = Convert.ToDecimal(((TextBox)this.Controls["txtBoxtreca" + prvaPozicija + "1"]).Text);
+
+            return drugiElement / prviElement;
+        }
+
+
+        private void nepouzdanost()
+        {
+            decimal sumaOtkaza = 0;
+            for (int i = 0; i < Convert.ToInt32(comboBoxBrojIntervala.SelectedItem); i++)
+            {
+                sumaOtkaza += Convert.ToInt32(((TextBox)this.Controls["txtBoxprva" + i + "1"]).Text);
+                ((TextBox)this.Controls["txtBoxdruga" + i + "1"]).Text = Math.Round((sumaOtkaza / Convert.ToDecimal(textBoxBrojOtkaza.Text)), 4).ToString();
+            }
+        }
+        private void pouzdanost()
+        {
+            for (int i = 0; i < Convert.ToInt32(comboBoxBrojIntervala.SelectedItem); i++)
+            {
+                decimal pouzdanost = Convert.ToDecimal(((TextBox)this.Controls["txtBoxdruga" + i + "1"]).Text);
+                ((TextBox)this.Controls["txtBoxtreca" + i + "1"]).Text = Math.Round(1 - pouzdanost, 4).ToString();
+            }
+        }
         private decimal srednjeVremeDoOtkaza()
         {
             int sumaIntervala = 0;
@@ -242,33 +248,29 @@ namespace PouzdanostInformacionihSistema
 
             return sumaIntervala / Convert.ToDecimal(textBoxBrojOtkaza.Text) * Convert.ToDecimal(comboBoxVremeRada.SelectedItem);
         }
-
-        private void btnScreenShot_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if(labelSrednjeVremeDoOtkaza.Text != "0")
-                {
-                    SaveScreenshot(this);
-                    MessageBox.Show("Uspešno sačuvan screenshot rezultata.", "Poruka", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Pre čuvanja rezultata morate imati neki račun.", "Poruka", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show("Došlo je do greške: " + ex.Message);
-            }
-        }
         private static void SaveScreenshot(Form frm)
         {
-            string ImagePath = string.Format(System.AppDomain.CurrentDomain.BaseDirectory + @"\Rezultati_Screenshots\Screen_{0}.png", DateTime.Now.Ticks);
+            string currentPath = System.AppDomain.CurrentDomain.BaseDirectory;
+
+            //ovim ispod se kreira folder ukoliko prethodno ne postoji
+            bool folderExists = Directory.Exists(currentPath + @"\Rezultati_Screenshots");
+            if (!folderExists)
+                Directory.CreateDirectory(currentPath + @"\Rezultati_Screenshots");
+
+
+            string ImagePath = string.Format(currentPath + @"\Rezultati_Screenshots\Screen_{0}.png", DateTime.Now.Ticks);
             Bitmap Image = new Bitmap(frm.Width, frm.Height);
             frm.DrawToBitmap(Image, new Rectangle(0, 0, frm.Width, frm.Height));
             Image.Save(ImagePath, System.Drawing.Imaging.ImageFormat.Png);
+        }
+        private void resetujKontrole()
+        {
+            comboBoxPrviIntervalOtkaza.Text = "";
+            comboBoxPrviInterval.Text = "";
+            comboBoxVremeRada.Text = "";
+
+            comboBoxPrviIntervalOtkaza.Items.Clear();
+            comboBoxPrviInterval.Items.Clear();
         }
     }
 }
